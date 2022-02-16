@@ -102,9 +102,9 @@ class Game extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      puzzles: [{trio: ['cake', 'wheel', 'stick'], answer: 'cheese', solved: false}, 
-                {trio: ['me', 'di', 'um'], answer: 'lol', solved: false},
-                {trio: ['hard', 'as', 'fuck'], answer: 'lol', solved: false},],
+      puzzles: [{trio: ['aid', 'rubber', 'wagon'], answer: 'band', solved: false}, 
+                {trio: ['fox', 'man', 'peep'], answer: 'hole', solved: false},
+                {trio: ['home', 'sea', 'bed'], answer: 'sick', solved: false},],
     }
   }
 
