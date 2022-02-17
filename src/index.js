@@ -94,7 +94,7 @@ class Puzzle extends React.Component {
           <div className="flex justify-center">
             {this.state.started
               ? <div className='mt-2'>
-                  <div className="text-center">{this.props.puzzle.trio[0]} / {this.props.puzzle.trio[1]} / {this.props.puzzle.trio[2]}</div>
+                  <div className="text-center white-space-nowrap">{this.props.puzzle.trio[0]} / {this.props.puzzle.trio[1]} / {this.props.puzzle.trio[2]}</div>
                   <input
                     disabled={this.props.solvedTime}
                     defaultValue={this.props.solvedTime ? this.props.puzzle.answer : ''}
@@ -244,7 +244,7 @@ class Game extends React.Component {
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
             Your job is to figure out the
             word that is the 'missing link'. In this case, the answer is
-            <em> cheese</em> (<em>cottage </em>cheese, swiss <em> cheese</em>, and <em>cheese </em>cake).
+            <em> cheese</em> (cottage <em>cheese</em>, swiss <em> cheese</em>, and <em>cheese </em>cake).
             The answer can be a prefix or suffix for each clue word.
           </p>
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
@@ -272,7 +272,7 @@ class Game extends React.Component {
           <div className="flex justify-center font-mono font-italic font-bold text-xs">
             (next puzzle in {24 - (new Date().getHours())} hrs)
           </div>
-          <div className="w-1/2 h-28 mx-auto font-mono mt-4">
+          <div className="w-screen mx-auto font-mono mt-4">
             <Puzzle
               title='Easy'
               startTime={this.state.game[0].startTime}
@@ -283,7 +283,7 @@ class Game extends React.Component {
               setStartedTime={(time) => this.setStartedTime(0, time)}
             />
           </div>
-          <div className="w-1/2 h-28 mx-auto font-mono mt-6">
+          <div className="w-screen mx-auto font-mono mt-6">
             <Puzzle
               title='Medium'
               startTime={this.state.game[1].startTime}
@@ -294,7 +294,7 @@ class Game extends React.Component {
               setStartedTime={(time) => this.setStartedTime(1, time)}
             />
           </div>
-          <div className="w-1/2 h-28 mx-auto font-mono mt-6">
+          <div className="w-screen mx-auto font-mono mt-6">
             <Puzzle
               title='Hard'
               startTime={this.state.game[2].startTime}

@@ -26,5 +26,19 @@ export const puzzles = [
       trio: ["dust", "cereal", "fish"],
       answer: "bowl"
     }  
+  ],
+  [
+    {
+      trio: ["dream", "break", "light"],
+      answer: "day"
+    },
+    {
+      trio: ["opera", "hand", "dish"],
+      answer: "soap"
+    },
+    {
+      trio: ["cross", "rain", "tie"],
+      answer: "bow"
+    }  
   ]
 ]
