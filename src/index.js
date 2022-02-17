@@ -2,24 +2,57 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, ClockIcon, LockClosedIcon } from '@heroicons/react/solid'
 import './index.css';
+import { puzzles } from './puzzles';
+import InstructionModal from './Instructions';
 
 class Puzzle extends React.Component {
   constructor(props) {
     super(props)
+    let startTime = this.props.startTime;
+    let started = Boolean(startTime);
+    let secondsPast = 0;
+    if (started) {
+      if (this.props.solvedTime) {
+        secondsPast = this.props.solvedTime;
+      } else {
+        let now = new Date().getTime();
+        secondsPast = Math.floor((now - startTime) / 1000);
+      }
+    }
     this.state = {
-      started: false,
-      timeStarted: null,
+      started: started,
+      timeStarted: startTime,
       animateInput: false,
-      secondsPast: 0,
+      secondsPast: secondsPast,
       interval: null,
     }
   }
 
+  componentDidMount() {
+    if (this.state.started && !this.props.solvedTime) {
+      this.startTimer();
+    }
+  }
+
   startPuzzle() {
-    console.log('start')
+    this.startTimer();
+    let timeStarted = new Date().getTime();
+    this.props.setStartedTime(timeStarted);
+    let prevState = this.state;
+    prevState.started = true;
+    prevState.timeStarted = timeStarted;
+    this.setState(prevState)
+  }
+
+  startTimer() {
     let clock = setInterval(this.updateTime, 1000);
-    this.setState({started: true, timeStarted: new Date().getTime(), interval: clock});
-    
+    let prevState = this.state;
+    prevState.interval = clock;
+    this.setState(prevState);
+  }
+
+  stopTimer() {
+    clearInterval(this.state.interval);
   }
 
   updateTime = () => {
@@ -31,8 +64,8 @@ class Puzzle extends React.Component {
   attemptSolve = (event) => {
     if (event.key === 'Enter'){
       if (event.target.value.toLowerCase() === this.props.puzzle.answer) {
-        this.props.onSolve();
-        clearInterval(this.state.interval);
+        this.props.onSolve(this.state.secondsPast);
+        this.stopTimer();
       } else {
         this.toggleInputAnimation();
         event.target.value = '';
@@ -64,7 +97,8 @@ class Puzzle extends React.Component {
               ? <div className='mt-2'>
                   <div className="text-center">{this.props.puzzle.trio[0]} / {this.props.puzzle.trio[1]} / {this.props.puzzle.trio[2]}</div>
                   <input
-                    disabled={this.props.puzzle.solved}
+                    disabled={this.props.solvedTime}
+                    defaultValue={this.props.solvedTime ? this.props.puzzle.answer : ''}
                     className={this.state.animateInput ? "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black animate-wiggle border-red-700"
                                                        : "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white"}
                     onAnimationEnd={() => this.toggleInputAnimation()} 
@@ -101,34 +135,82 @@ class Puzzle extends React.Component {
 class Game extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      puzzles: [{trio: ['aid', 'rubber', 'wagon'], answer: 'band', solved: false}, 
-                {trio: ['fox', 'man', 'peep'], answer: 'hole', solved: false},
-                {trio: ['home', 'sea', 'bed'], answer: 'sick', solved: false},],
+    let buildState = {id: null};
+    
+    const dateGameStarted = new Date('02/16/2022');
+    let today = new Date();
+    const puzzleNumber = Math.floor((today.getTime() - dateGameStarted.getTime()) / (1000 * 3600 * 24));
+    const puzzle = puzzles[puzzleNumber];
+
+    const seenHelp = localStorage.getItem('help');
+    const storedState = JSON.parse(localStorage.getItem(puzzleNumber));
+
+    if (storedState) {
+      // Implement restoring of game state
+      buildState.game = storedState;
+    } else {
+      buildState.game = []
+      for (let i = 0; i < 3; i++) {
+        buildState.game.push({puzzle: puzzle[i], startTime: null, solvedTime: null});
+      }
     }
+    
+    buildState.id = puzzleNumber;
+    buildState.page = seenHelp ? 1 : 0;
+    this.state = buildState;
+  }
+
+  storeState() {
+    localStorage.setItem(this.state.id, JSON.stringify(this.state.game));
   }
 
   enableStart(i) {
     if (i === 0) {
       return true;
     } else {
-      return this.state.puzzles[i - 1].solved;
+      return this.state.game[i - 1].solvedTime;
     }
   }
 
-  puzzleSolved(i) {
-    const state = this.state;
-    state.puzzles[i].solved = true;
+  setStartedTime(i, time) {
+    let state = this.state;
+    state.game[i].startTime = time;
     this.setState(state);
+    this.storeState();
+  }
+
+  puzzleSolved(i, time) {
+    let state = this.state;
+    state.game[i].solvedTime = time;
+    this.setState(state);
+    this.storeState();
+
+    if (i == 2) {
+      let x = 0;
+      let flash = setInterval(() => {
+        this.handleDarkMode();
+        if (x == 5) {
+          clearInterval(flash);
+        }
+        x++;
+      }, 500);
+    }
+  }
+
+  setPage(i) {
+    let state = this.state;
+    state.page = i;
+    this.setState(state);
+    if (i == 1) {
+      localStorage.setItem('help', 'seen');
+    }
   }
 
   handleDarkMode() {
     if (localStorage.theme === 'dark') {
-      console.log('changing to dark')
       document.documentElement.classList.remove('dark')
       localStorage.theme = 'light'
     } else {
-      console.log('changing to light')
       document.documentElement.classList.add('dark')
       localStorage.theme = 'dark'
     }
@@ -136,51 +218,119 @@ class Game extends React.Component {
 
   render() {
     return (
-      <div className="bg-yellow-50 w-screen h-screen dark:bg-black text-black dark:text-yellow-50">
+      <div className="w-screen h-screen">
         <div className="flex justify-center font-mono text-7xl pt-3 font-bold">
           Trio
         </div>
         <div className="flex justify-center font-mono font-bold">
-          <QuestionMarkCircleIcon className="h-7 w-7 mx-3 cursor-pointer"/>
-          <ChartBarIcon className="h-7 w-7 mx-3 cursor-pointer"/>
+          <QuestionMarkCircleIcon
+            className="h-7 w-7 mx-3 cursor-pointer"
+            onClick={() => this.setPage(0)}
+          />
+          <ChartBarIcon
+            className="h-7 w-7 mx-3 cursor-pointer"
+            onClick={() => this.setPage(2)}
+          />
           <MoonIcon onClick={() => this.handleDarkMode()} className="h-7 w-7 mx-3 cursor-pointer"/>
         </div>
-        <div className="flex justify-center font-mono font-italic font-bold mt-5">
-          Puzzle #46
+        <div
+          className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2'
+          hidden={this.state.page != 0}
+        >
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+            Trio is a simple game based on the <a className="text-blue-300" target="_blank" href="https://en.wikipedia.org/wiki/Remote_Associates_Test">Remote Associates Test</a>. You will be prompted with three different
+            words and a timer will start. For example, the words may be
+          </p>
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">cottage / swiss / cake</p>
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+            Your job is to figure out the
+            word that is the 'missing link'. In this case, the answer is
+            <em> cheese</em> (<em>cottage </em>cheese, swiss <em> cheese</em>, and <em>cheese </em>cake).
+            The answer can be a prefix or suffix for each clue word.
+          </p>
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+            There is no penalty for guessing, your final time is the only
+            thing that counts.
+          </p>
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+            <em>Contact: <a className="text-pink-300" href="mailto: beaubien.jon@gmail.com">beaubien.jon@gmail.com</a></em>
+          </p>
+          <div className='text-center'>
+            <button
+              className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              type="button"
+              onClick={() => this.setPage(1)}
+            >
+              Go to game
+            </button>
+          </div>
+          
         </div>
-        <div className="w-1/2 h-28 mx-auto font-mono mt-4">
-          <Puzzle
-            title='Easy'
-            puzzle={this.state.puzzles[0]}
-            onSolve={() => this.puzzleSolved(0)}
-            enableStart={() => this.enableStart(0)}
-          />
+        <div hidden={this.state.page != 1}>
+          <div className="flex justify-center font-mono font-italic font-bold mt-5">
+            Puzzle #{46 + this.state.id}
+          </div>
+          <div className="flex justify-center font-mono font-italic font-bold text-xs">
+            (next puzzle in {24 - (new Date().getHours())} hrs)
+          </div>
+          <div className="w-1/2 h-28 mx-auto font-mono mt-4">
+            <Puzzle
+              title='Easy'
+              startTime={this.state.game[0].startTime}
+              puzzle={this.state.game[0].puzzle}
+              solvedTime={this.state.game[0].solvedTime}
+              onSolve={(time) => this.puzzleSolved(0, time)}
+              enableStart={() => this.enableStart(0)}
+              setStartedTime={(time) => this.setStartedTime(0, time)}
+            />
+          </div>
+          <div className="w-1/2 h-28 mx-auto font-mono mt-6">
+            <Puzzle
+              title='Medium'
+              startTime={this.state.game[1].startTime}
+              puzzle={this.state.game[1].puzzle}
+              solvedTime={this.state.game[1].solvedTime}
+              onSolve={(time) => this.puzzleSolved(1, time)}
+              enableStart={() => this.enableStart(1)}
+              setStartedTime={(time) => this.setStartedTime(1, time)}
+            />
+          </div>
+          <div className="w-1/2 h-28 mx-auto font-mono mt-6">
+            <Puzzle
+              title='Hard'
+              startTime={this.state.game[2].startTime}
+              puzzle={this.state.game[2].puzzle}
+              solvedTime={this.state.game[2].solvedTime}
+              onSolve={(time) => this.puzzleSolved(2, time)}
+              enableStart={() => this.enableStart(2)}
+              setStartedTime={(time) => this.setStartedTime(2, time)}
+            />
+          </div>
         </div>
-        <div className="w-1/2 h-28 mx-auto font-mono mt-2">
-          <Puzzle
-            title='Medium'
-            puzzle={this.state.puzzles[1]}
-            onSolve={() => this.puzzleSolved(1)}
-            enableStart={() => this.enableStart(1)}
-          />
+        <div
+          className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'
+          hidden={this.state.page != 2}
+        >
+          <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+            Statistics coming soon.
+          </p>
+          <button
+            className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => this.setPage(1)}
+          >
+            Back to game
+          </button>
         </div>
-        <div className="w-1/2 h-28 mx-auto font-mono mt-2">
-          <Puzzle
-            title='Hard'
-            puzzle={this.state.puzzles[2]}
-            onSolve={() => this.puzzleSolved(2)}
-            enableStart={() => this.enableStart(2)}
-          />
-        </div>
-          {/* <div>Easy</div>
-          <div>Medium</div>
-          <div>Hard</div> */}
+        
       </div>
     );
   }
 }
 
 // ========================================
+
+document.body.className = "bg-yellow-50 dark:bg-black text-black dark:text-yellow-50"
 
 ReactDOM.render(
   <Game />,
