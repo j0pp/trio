@@ -40,5 +40,19 @@ export const puzzles = [
       trio: ["cross", "rain", "tie"],
       answer: "bow"
     }  
+  ],
+  [
+    {
+      trio: ["print", "berry", "bird"],
+      answer: "blue"
+    },
+    {
+      trio: ["peach", "arm", "tar"],
+      answer: "pit"
+    },
+    {
+      trio: ["office", "mail", "car"],
+      answer: "box"
+    }  
   ]
 ]
