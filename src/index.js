@@ -237,7 +237,7 @@ class Game extends React.Component {
           hidden={this.state.page !== 0}
         >
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
-            Trio is a simple game based on the <a className="text-blue-300" target="_blank" href="https://en.wikipedia.org/wiki/Remote_Associates_Test" rel="noreferrer">Remote Associates Test</a>. You will be prompted with three different
+            Trio is a daily word game based on the <a className="text-blue-300" target="_blank" href="https://en.wikipedia.org/wiki/Remote_Associates_Test" rel="noreferrer">Remote Associates Test</a>. You will be prompted with three different
             words and a timer will start. For example, the words may be
           </p>
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">cottage / swiss / cake</p>
