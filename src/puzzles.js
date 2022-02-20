@@ -54,5 +54,33 @@ export const puzzles = [
       trio: ["office", "mail", "car"],
       answer: "box"
     }  
+  ],
+  [
+    {
+      trio: ["coffee", "bag", "jelly"],
+      answer: "bean"
+    },
+    {
+      trio: ["french", "car", "shoe"],
+      answer: "horn"
+    },
+    {
+      trio: ["animal", "back", "rat"],
+      answer: "pack"
+    }  
+  ],
+  [
+    {
+      trio: ["coin", "quick", "spoon"],
+      answer: "silver"
+    },
+    {
+      trio: ["shock", "shave", "taste"],
+      answer: "after"
+    },
+    {
+      trio: ["off", "military", "first"],
+      answer: "base"
+    }  
   ]
 ]

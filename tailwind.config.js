@@ -13,7 +13,10 @@ module.exports = {
       },
       animation: {
         wiggle: "wiggle 200ms ease-in-out"
-      }
+      },
+      fontFamily: {
+        geo: ['Geo', 'monospace'],
+      },
     }
   },
   plugins: [],
