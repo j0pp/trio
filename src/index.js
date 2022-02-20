@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon } from '@heroicons/react/solid'
-import { ShareIcon } from '@heroicons/react/outline'
+//import { ShareIcon } from '@heroicons/react/outline'
 import './index.css';
 import { puzzles } from './puzzles';
 

@@ -3,9 +3,6 @@ import { InformationCircleIcon } from '@heroicons/react/outline'
 import ReactTooltip from 'react-tooltip'
 
 class Title extends React.Component {
-  constructor(props) {
-    super(props)
-  }
 
   render() {
     if (this.props.cryptic) {
