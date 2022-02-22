@@ -82,5 +82,19 @@ export const puzzles = [
       trio: ["off", "military", "first"],
       answer: "base"
     }  
+  ],
+  [
+    {
+      trio: ["sandwich", "house", "golf"],
+      answer: "club"
+    },
+    {
+      trio: ["boot", "summer", "ground"],
+      answer: "camp"
+    },
+    {
+      trio: ["master", "toss", "finger"],
+      answer: "ring"
+    }  
   ]
 ]

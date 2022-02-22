@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon } from '@heroicons/react/solid'
+import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@heroicons/react/solid'
 //import { ShareIcon } from '@heroicons/react/outline'
 import './index.css';
 import { puzzles } from './puzzles';
 
 // Components
 import Puzzle from './Puzzle';
+import SuggestionForm from './SuggestionForm';
 
 class Game extends React.Component {
   constructor(props) {
@@ -123,6 +124,13 @@ class Game extends React.Component {
             className="h-7 w-7 mx-3 cursor-pointer"
             onClick={() => this.setPage(2)}
           />
+          <div className='mx-3'>
+            <LightBulbIcon
+              className="h-7 w-7 cursor-pointer"
+              onClick={() => this.setPage(3)}
+            />
+            <p className='text-xs text-center'>NEW</p>
+          </div>
           <MoonIcon onClick={() => this.handleDarkMode()} className="h-7 w-7 mx-3 cursor-pointer"/>
         </div>
         <div
@@ -221,6 +229,20 @@ class Game extends React.Component {
           </p>
           <button
             className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+            onClick={() => this.setPage(1)}
+          >
+            Back to game
+          </button>
+        </div>
+
+        <div
+          className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'
+          hidden={this.state.page !== 3}
+        >
+          <SuggestionForm />
+          <button
+            className="mt-10 text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button"
             onClick={() => this.setPage(1)}
           >
