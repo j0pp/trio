@@ -22,6 +22,7 @@ class SuggestionForm extends React.Component {
                 className='indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white'
                 type="text"
                 name="name"
+                required
               />
             </p>
 
@@ -33,6 +34,7 @@ class SuggestionForm extends React.Component {
                 className='indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white'
                 type="text"
                 name="trio"
+                required
               />
             </p>
 
@@ -44,6 +46,7 @@ class SuggestionForm extends React.Component {
                 className='indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white'
                 type="text"
                 name="answer"
+                required
               />
             </p>
             

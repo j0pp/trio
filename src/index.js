@@ -7,7 +7,7 @@ import { puzzles } from './puzzles';
 
 // Components
 import Puzzle from './Puzzle';
-//import SuggestionForm from './SuggestionForm';
+import SuggestionForm from './SuggestionForm';
 
 class Game extends React.Component {
   constructor(props) {
@@ -236,19 +236,19 @@ class Game extends React.Component {
           </button>
         </div>
 
-        {/* <div
+        <div
           className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'
           hidden={this.state.page !== 3}
         >
           <SuggestionForm />
           <button
-            className="mt-10 text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            className="mt-10 mb-5 text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button"
             onClick={() => this.setPage(1)}
           >
             Back to game
           </button>
-        </div> */}
+        </div>
         
       </div>
     );
