@@ -124,13 +124,13 @@ class Game extends React.Component {
             className="h-7 w-7 mx-3 cursor-pointer"
             onClick={() => this.setPage(2)}
           />
-          {/* <div className='mx-3'>
+          <div className='mx-3'>
             <LightBulbIcon
               className="h-7 w-7 cursor-pointer"
               onClick={() => this.setPage(3)}
             />
             <p className='text-xs text-center'>NEW</p>
-          </div> */}
+          </div>
           <MoonIcon onClick={() => this.handleDarkMode()} className="h-7 w-7 mx-3 cursor-pointer"/>
         </div>
         <div
