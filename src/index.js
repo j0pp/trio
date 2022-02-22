@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@heroicons/react/solid'
-//import { ShareIcon } from '@heroicons/react/outline'
+import { ShareIcon } from '@heroicons/react/outline'
 import './index.css';
 import { puzzles } from './puzzles';
 
 // Components
 import Puzzle from './Puzzle';
-//import SuggestionForm from './SuggestionForm';
+import SuggestionForm from './SuggestionForm';
 
 class Game extends React.Component {
   constructor(props) {
@@ -236,7 +236,7 @@ class Game extends React.Component {
           </button>
         </div>
 
-        {/* <div
+        <div
           className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'
           hidden={this.state.page !== 3}
         >
@@ -248,7 +248,7 @@ class Game extends React.Component {
           >
             Back to game
           </button>
-        </div> */}
+        </div>
         
       </div>
     );
