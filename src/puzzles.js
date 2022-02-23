@@ -96,5 +96,33 @@ export const puzzles = [
       trio: ["master", "toss", "finger"],
       answer: "ring"
     }  
+  ],
+  [
+    {
+      trio: ["chamber", "mask", "natural"],
+      answer: "gas"
+    },
+    {
+      trio: ["foul", "ground", "mate"],
+      answer: "play"
+    },
+    {
+      trio: ["hammer", "gear", "hunter"],
+      answer: "head"
+    }  
+  ],
+  [
+    {
+      trio: ["mill", "tooth", "dust"],
+      answer: "saw"
+    },
+    {
+      trio: ["change", "circuit", "cake"],
+      answer: "short"
+    },
+    {
+      trio: ["way", "board", "sleep"],
+      answer: "walk"
+    }  
   ]
 ]
