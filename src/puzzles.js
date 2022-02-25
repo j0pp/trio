@@ -124,5 +124,33 @@ export const puzzles = [
       trio: ["way", "board", "sleep"],
       answer: "walk"
     }  
+  ],
+  [
+    {
+      trio: ["basket", "eight", "snow"],
+      answer: "ball"
+    },
+    {
+      trio: ["blank", "list", "mate"],
+      answer: "check"
+    },
+    {
+      trio: ["tail", "water", "flood"],
+      answer: "gate"
+    }  
+  ],
+  [
+    {
+      trio: ["right", "cat", "carbon"],
+      answer: "copy"
+    },
+    {
+      trio: ["pile", "market", "room"],
+      answer: "stock"
+    },
+    {
+      trio: ["cover", "arm", "wear"],
+      answer: "under"
+    }  
   ]
 ]
