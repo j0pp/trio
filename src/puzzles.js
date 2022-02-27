@@ -152,5 +152,19 @@ export const puzzles = [
       trio: ["cover", "arm", "wear"],
       answer: "under"
     }  
+  ],
+  [
+    {
+      trio: ["water", "mine", "shaker"],
+      answer: "salt"
+    },
+    {
+      trio: ["type", "ghost", "screen"],
+      answer: "writer"
+    },
+    {
+      trio: ["man", "glue", "star"],
+      answer: "super"
+    }  
   ]
 ]
