@@ -166,5 +166,61 @@ export const puzzles = [
       trio: ["man", "glue", "star"],
       answer: "super"
     }  
+  ],
+  [
+    {
+      trio: ["horse", "human", "drag"],
+      answer: "race"
+    },
+    {
+      trio: ["break", "bean", "cake"],
+      answer: "coffee"
+    },
+    {
+      trio: ["wise", "work", "tower"],
+      answer: "clock"
+    }  
+  ],
+  [
+    {
+      trio: ["loser", "throat", "spot"],
+      answer: "sore"
+    },
+    {
+      trio: ["cry", "front", "ship"],
+      answer: "battle"
+    },
+    {
+      trio: ["roll", "bean", "fish"],
+      answer: "jelly"
+    }  
+  ],
+  [
+    {
+      trio: ["cane", "daddy", "plum"],
+      answer: "sugar"
+    },
+    {
+      trio: ["bottom", "curve", "door"],
+      answer: "bell"
+    },
+    {
+      trio: ["tomato", "bomb", "picker"],
+      answer: "cherry"
+    }  
+  ],
+  [
+    {
+      trio: ["cracker", "fly", "fighter"],
+      answer: "fire"
+    },
+    {
+      trio: ["fight", "control", "machine"],
+      answer: "gun"
+    },
+    {
+      trio: ["pea", "shell", "chest"],
+      answer: "nut"
+    }  
   ]
 ]
