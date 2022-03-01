@@ -100,15 +100,6 @@ class App extends React.Component {
     }
   }
 
-  setPage(i) {
-    let state = this.state;
-    state.page = i;
-    this.setState(state);
-    if (i === 1) {
-      localStorage.setItem('help', 'seen');
-    }
-  }
-
   handleDarkMode() {
     if (localStorage.theme === 'dark') {
       document.documentElement.classList.remove('dark')

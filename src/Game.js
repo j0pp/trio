@@ -2,7 +2,7 @@ import React from 'react';
 import Puzzle from './Puzzle';
 
 import db from './firebase';
-import { doc, setDoc, Timestamp, getDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 class Game extends React.Component {
     constructor(props) {
