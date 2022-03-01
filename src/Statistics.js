@@ -50,6 +50,7 @@ class Statistics extends React.Component {
     render() {
         return (
         <div>
+            <p>Statistics:</p>
             <p>Your time was {this.state.playerTimes[0]}</p>
             <p>Best time was {this.state.bestTime}</p>
             <p>Worst time was {this.state.worstTime}</p>
