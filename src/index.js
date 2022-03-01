@@ -4,6 +4,9 @@ import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@
 //import { ShareIcon } from '@heroicons/react/outline'
 import './index.css';
 import { puzzles } from './puzzles';
+import db from './firebase';
+import { doc, setDoc, Timestamp, getDoc } from "firebase/firestore";
+import Statistics from './Statistics'; 
 
 // Components
 import Puzzle from './Puzzle';
@@ -56,11 +59,17 @@ class Game extends React.Component {
     this.storeState();
   }
 
-  puzzleSolved(i, time) {
+  async puzzleSolved(i, time) {
     let state = this.state;
+    console.log(state)
     state.game[i].solvedTime = time;
     this.setState(state);
     this.storeState();
+    let difficulties = ['easy', 'medium', 'hard']
+    const docData = {
+      solvedTime: time
+    };
+    await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', Math.floor(Math.random() * 1000).toString()), docData);
 
     if (i === 2) {
       let x = 0;
@@ -227,6 +236,10 @@ class Game extends React.Component {
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
             Statistics coming soon.
           </p>
+          <Statistics
+            solved={1}
+            currState={this.state}
+          />
           <button
             className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
             type="button"
