@@ -1,10 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SuggestionForm extends React.Component {
 
   render() {
       return (
-        <div>
+        <div className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2'>
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
             Have a good idea for a potential Trio? Submit it here!
           </p>
@@ -69,6 +70,14 @@ class SuggestionForm extends React.Component {
               </button>
             </p>
           </form>
+          <Link to="/game">
+          <button
+            className="mt-10 mb-5 text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+            type="button"
+          >
+            Back to game
+          </button>
+          </Link>
         </div>
       );
     

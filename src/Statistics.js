@@ -1,6 +1,9 @@
 import React from 'react';
 import db from './firebase'
 import { doc, getDoc, getDocs, collection, query, orderBy, limit, where } from "firebase/firestore";
+import {
+    Link
+  } from "react-router-dom";
 
 class Statistics extends React.Component {
     constructor(props) {
@@ -49,12 +52,24 @@ class Statistics extends React.Component {
     
     render() {
         return (
-        <div>
+        <div className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'>
+            <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+                Statistics coming soon.
+            </p>
             <p>Statistics:</p>
-            <p>Your time was {this.state.playerTimes[0]}</p>
-            <p>Best time was {this.state.bestTime}</p>
-            <p>Worst time was {this.state.worstTime}</p>
-            <p>You are in the top {this.state.percent}%</p>
+                <p>Your time was {this.state.playerTimes[0]}</p>
+                <p>Best time was {this.state.bestTime}</p>
+                <p>Worst time was {this.state.worstTime}</p>
+                <p>You are in the top {this.state.percent}%</p>
+            <Link to="/game">
+            <button
+                className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+            >
+                Back to game
+            </button>
+            </Link>
+            
         </div>
         );
     }
