@@ -1,16 +1,6 @@
+// React
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@heroicons/react/solid'
-//import { ShareIcon } from '@heroicons/react/outline'
-import './index.css';
-import { puzzles } from './puzzles';
-import db from './firebase';
-import { doc, setDoc } from "firebase/firestore";
-import Statistics from './Statistics'; 
-import Game from './Game';
-import SuggestionForm from './SuggestionForm';
-import Instructions from './Instructions';
-
 import {
   BrowserRouter as Router,
   Routes,
@@ -20,7 +10,20 @@ import {
 } from "react-router-dom";
 
 // Components
+import Statistics from './Statistics'; 
+import Game from './Game';
+import SuggestionForm from './SuggestionForm';
+import Instructions from './Instructions';
+import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@heroicons/react/solid'
+//import { ShareIcon } from '@heroicons/react/outline'
 
+// Other
+import './index.css';
+import { puzzles } from './puzzles';
+
+// Firebase
+import db from './firebase';
+import { doc, setDoc } from "firebase/firestore";
 
 class App extends React.Component {
   constructor(props) {
@@ -110,22 +113,6 @@ class App extends React.Component {
     }
   }
 
-  // TODO:
-  // sharePuzzle() {
-  //   /* Get the text field */
-  //   let copyText = '';
-  
-  //   /* Select the text field */
-  //   copyText.select();
-  //   copyText.setSelectionRange(0, 99999); /* For mobile devices */
-  
-  //     /* Copy the text inside the text field */
-  //   navigator.clipboard.writeText(copyText.value);
-  
-  //   /* Alert the copied text */
-  //   alert("Copied the text: " + copyText.value);
-  // }
-
   render() {
     return (
       <Router>
@@ -137,25 +124,24 @@ class App extends React.Component {
             <Link to="/info">
               <QuestionMarkCircleIcon
                 className="h-7 w-7 mx-3 cursor-pointer"
-                onClick={() => console.log(0)}
               />
             </Link>
             <Link to="/stats">
               <ChartBarIcon
                 className="h-7 w-7 mx-3 cursor-pointer"
-                onClick={() => console.log(0)}
               />
             </Link>
             <div className='mx-3'>
               <Link to="/suggestions">
                 <LightBulbIcon
                   className="h-7 w-7 cursor-pointer"
-                  onClick={() => console.log(0)}
                 />
               </Link>
-              <p className='text-xs text-center'>NEW</p>
             </div>
-            <MoonIcon onClick={() => this.handleDarkMode()} className="h-7 w-7 mx-3 cursor-pointer"/>
+            <MoonIcon
+              onClick={() => this.handleDarkMode()}
+              className="h-7 w-7 mx-3 cursor-pointer"
+            />
           </div>
           <Routes>
             <Route path='/' element={

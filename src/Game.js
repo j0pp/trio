@@ -1,6 +1,15 @@
+// React
 import React from 'react';
-import Puzzle from './Puzzle';
+import { Link } from 'react-router-dom';
 
+// Components
+import Puzzle from './Puzzle';
+import { ShareIcon, ChartBarIcon } from '@heroicons/react/solid';
+
+// Utils
+import { formatTime } from './utils/utils';
+
+// Firebase
 import db from './firebase';
 import { doc, setDoc } from "firebase/firestore";
 
@@ -38,44 +47,64 @@ class Game extends React.Component {
         localStorage.setItem(this.state.id, JSON.stringify(this.state.game));
       }
     
-      enableStart(i) {
-        if (i === 0) {
-          return true;
-        } else {
-          return this.state.game[i - 1].solvedTime;
-        }
+    enableStart(i) {
+      if (i === 0) {
+        return true;
+      } else {
+        return this.state.game[i - 1].solvedTime;
       }
-    
-      setStartedTime(i, time) {
-        let state = this.state;
-        state.game[i].startTime = time;
-        this.setState(state);
-        this.storeState();
+    }
+  
+    setStartedTime(i, time) {
+      let state = this.state;
+      state.game[i].startTime = time;
+      this.setState(state);
+      this.storeState();
+    }
+  
+    async puzzleSolved(i, time) {
+      let state = this.state;
+      console.log(state)
+      state.game[i].solvedTime = time;
+      this.setState(state);
+      this.storeState();
+      let difficulties = ['easy', 'medium', 'hard']
+      const docData = {
+        solvedTime: time
+      };
+      await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', Math.floor(Math.random() * 1000).toString()), docData);
+  
+      if (i === 2) {
+        let x = 0;
+        let flash = setInterval(() => {
+          this.handleDarkMode();
+          if (x === 5) {
+            clearInterval(flash);
+          }
+          x++;
+        }, 500);
       }
-    
-      async puzzleSolved(i, time) {
-        let state = this.state;
-        console.log(state)
-        state.game[i].solvedTime = time;
-        this.setState(state);
-        this.storeState();
-        let difficulties = ['easy', 'medium', 'hard']
-        const docData = {
-          solvedTime: time
-        };
-        await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', Math.floor(Math.random() * 1000).toString()), docData);
-    
-        if (i === 2) {
-          let x = 0;
-          let flash = setInterval(() => {
-            this.handleDarkMode();
-            if (x === 5) {
-              clearInterval(flash);
-            }
-            x++;
-          }, 500);
-        }
+    }
+
+    sharePuzzle = () => {
+          /* Get the text field */
+      let copyText = 'https://wordtrio.com \n';
+      this.state.game.forEach((puzzle) => {
+        copyText += formatTime(puzzle.solvedTime) + '\n'
+      });
+      let puzzleNum = this.state.id + 46;
+      copyText += 'puzzle #' + puzzleNum;
+
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(copyText).then(() => {
+          alert("Copied the text: " + copyText);
+        }, (err) => {
+          console.log('Failed to copy the text to clipboard.', err);
+        });
+      } else if (window.clipboardData) {
+        window.clipboardData.setData("Text", copyText);
       }
+    }
     
     render() {
         return (
@@ -119,18 +148,29 @@ class Game extends React.Component {
                 setStartedTime={(time) => this.setStartedTime(2, time)}
                 />
             </div>
-            {/* <div className='flex justify-center font-mono font-italic font-bold mt-3'>
-            <button
-                className='text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150'
-                hidden={this.state.game[this.state.game.length].solvedTime}
-                onClick={() => {this.sharePuzzle()}}
-            >
-                <ShareIcon
-                className="h-7 w-7 mx-3"
-                />
-                Share
-            </button>
-            </div> */}
+            <div className='flex justify-center font-mono font-italic font-bold my-3'>
+              <button
+                  className='rounded-lg border-2 p-2 border-black dark:border-yellow-50'
+                  hidden={!this.state.game[this.state.game.length - 1].solvedTime}
+                  onClick={this.sharePuzzle}
+              >
+                  <ShareIcon
+                  className="h-7 w-7 mx-3"
+                  />
+                  Share
+              </button>
+              <Link to="/stats">
+                <button
+                    className='rounded-lg border-2 p-2 border-black dark:border-yellow-50 ml-3'
+                    hidden={!this.state.game[this.state.game.length - 1].solvedTime}
+                >
+                    <ChartBarIcon
+                    className="h-7 w-7 mx-3"
+                    />
+                    Stats
+                </button>
+              </Link>
+            </div>
             
         </div>
         );

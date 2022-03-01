@@ -1,8 +1,12 @@
+// React
 import React from 'react';
-import { ClockIcon, LockClosedIcon } from '@heroicons/react/solid'
 
 // Components
 import Title from './Title'
+import { ClockIcon, LockClosedIcon } from '@heroicons/react/solid'
+
+// Utils
+import { formatTime } from './utils/utils';
 
 class Puzzle extends React.Component {
   constructor(props) {
@@ -73,15 +77,6 @@ class Puzzle extends React.Component {
     }
   }
 
-  formatTime = (seconds) => {
-    let min = Math.floor(seconds / 60);
-    let secs = seconds % 60;
-    if (secs < 10) {
-      return min + ':0' + secs;
-    }
-    return min + ':' + secs;
-  }
-
   toggleInputAnimation() {
     let prevState = this.state;
     prevState.animateInput = !prevState.animateInput;
@@ -106,7 +101,7 @@ class Puzzle extends React.Component {
                   />
                   <div className="flex flex-row items-center justify-center">  
                     <ClockIcon className="h-7 w-7 m-1 text-center"/>
-                    <div className="">{this.formatTime(this.state.secondsPast)}</div>
+                    <div className="">{formatTime(this.state.secondsPast)}</div>
                   </div>
                 </div>
               : this.props.enableStart()
