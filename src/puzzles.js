@@ -222,5 +222,19 @@ export const puzzles = [
       trio: ["pea", "shell", "chest"],
       answer: "nut"
     }  
+  ],
+  [
+    {
+      trio: ["widow", "bite", "monkey"],
+      answer: "spider"
+    },
+    {
+      trio: ["manners", "round", "tennis"],
+      answer: "table"
+    },
+    {
+      trio: ["board", "blade", "back"],
+      answer: "switch"
+    }  
   ]
 ]
