@@ -21,10 +21,6 @@ import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@
 import './index.css';
 import { puzzles } from './puzzles';
 
-// Firebase
-import db from './firebase';
-import { doc, setDoc } from "firebase/firestore";
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -64,33 +60,12 @@ class App extends React.Component {
     localStorage.setItem(this.state.id, JSON.stringify(this.state.game));
   }
 
-  enableStart(i) {
-    if (i === 0) {
-      return true;
-    } else {
-      return this.state.game[i - 1].solvedTime;
-    }
-  }
-
-  setStartedTime(i, time) {
-    let state = this.state;
-    state.game[i].startTime = time;
-    this.setState(state);
-    this.storeState();
-  }
-
   async puzzleSolved(i, time) {
     let state = this.state;
-    console.log(state)
     state.game[i].solvedTime = time;
     this.setState(state);
     this.storeState();
-    let difficulties = ['easy', 'medium', 'hard']
-    const docData = {
-      solvedTime: time
-    };
-    await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', Math.floor(Math.random() * 1000).toString()), docData);
-
+    /*
     if (i === 2) {
       let x = 0;
       let flash = setInterval(() => {
@@ -101,6 +76,7 @@ class App extends React.Component {
         x++;
       }, 500);
     }
+    */
   }
 
   handleDarkMode() {
@@ -153,11 +129,11 @@ class App extends React.Component {
             } />
             <Route path='/game' element={<Game
               state={this.state}
+              onSolve={(i, time) => this.puzzleSolved(i, time)}
             />} />
             <Route path='/info' element={<Instructions/>} />
             <Route path='/stats' element={
             <Statistics
-              solved={1}
               currState={this.state}
             />
             } />
@@ -177,3 +153,5 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+

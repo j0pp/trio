@@ -11,7 +11,7 @@ import { formatTime } from './utils/utils';
 
 // Firebase
 import db from './firebase';
-import { doc, setDoc } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 class Game extends React.Component {
     constructor(props) {
@@ -63,8 +63,8 @@ class Game extends React.Component {
     }
   
     async puzzleSolved(i, time) {
+      this.props.onSolve(i, time)
       let state = this.state;
-      console.log(state)
       state.game[i].solvedTime = time;
       this.setState(state);
       this.storeState();
@@ -72,7 +72,7 @@ class Game extends React.Component {
       const docData = {
         solvedTime: time
       };
-      await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', Math.floor(Math.random() * 1000).toString()), docData);
+      await addDoc(collection(db, 'puzzles/' + state.id + difficulties[i] + '/players'), docData);
   
       if (i === 2) {
         let x = 0;
@@ -83,6 +83,16 @@ class Game extends React.Component {
           }
           x++;
         }, 500);
+      }
+    }
+
+    handleDarkMode() {
+      if (localStorage.theme === 'dark') {
+        document.documentElement.classList.remove('dark')
+        localStorage.theme = 'light'
+      } else {
+        document.documentElement.classList.add('dark')
+        localStorage.theme = 'dark'
       }
     }
 

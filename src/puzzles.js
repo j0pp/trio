@@ -222,5 +222,47 @@ export const puzzles = [
       trio: ["pea", "shell", "chest"],
       answer: "nut"
     }  
+  ],
+  [
+    {
+      trio: ["cracker", "fly", "fighter"],
+      answer: "fire"
+    },
+    {
+      trio: ["fight", "control", "machine"],
+      answer: "gun"
+    },
+    {
+      trio: ["pea", "shell", "chest"],
+      answer: "nut"
+    }  
+  ],
+  [
+    {
+      trio: ["cracker", "fly", "fighter"],
+      answer: "fire"
+    },
+    {
+      trio: ["fight", "control", "machine"],
+      answer: "gun"
+    },
+    {
+      trio: ["pea", "shell", "chest"],
+      answer: "nut"
+    }  
+  ],
+  [
+    {
+      trio: ["cracker", "fly", "fighter"],
+      answer: "fire"
+    },
+    {
+      trio: ["fight", "control", "machine"],
+      answer: "gun"
+    },
+    {
+      trio: ["pea", "shell", "chest"],
+      answer: "nut"
+    }  
   ]
 ]
