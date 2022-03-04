@@ -236,5 +236,19 @@ export const puzzles = [
       trio: ["board", "blade", "back"],
       answer: "switch"
     }  
+  ],
+  [
+    {
+      trio: ["playing", "credit", "report"],
+      answer: "card"
+    },
+    {
+      trio: ["salt", "deep", "foam"],
+      answer: "sea"
+    },
+    {
+      trio: ["land", "hand", "house"],
+      answer: "farm"
+    }  
   ]
 ]
