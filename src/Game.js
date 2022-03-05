@@ -132,7 +132,7 @@ class Game extends React.Component {
             </div>
             <div className="w-screen mx-auto font-mono mt-4">
                 <Puzzle
-                title='Easy'
+                title='Difficulty: Easy'
                 startTime={this.state.game[0].startTime}
                 puzzle={this.state.game[0].puzzle}
                 solvedTime={this.state.game[0].solvedTime}
@@ -143,7 +143,7 @@ class Game extends React.Component {
             </div>
             <div className="w-screen mx-auto font-mono mt-6">
                 <Puzzle
-                title='Medium'
+                title='Difficulty: Medium'
                 startTime={this.state.game[1].startTime}
                 puzzle={this.state.game[1].puzzle}
                 solvedTime={this.state.game[1].solvedTime}
@@ -154,7 +154,7 @@ class Game extends React.Component {
             </div>
             <div className="w-screen mx-auto font-mono mt-6">
                 <Puzzle
-                title='Hard'
+                title='Difficulty: Hard'
                 startTime={this.state.game[2].startTime}
                 puzzle={this.state.game[2].puzzle}
                 solvedTime={this.state.game[2].solvedTime}
