@@ -80,13 +80,17 @@ class App extends React.Component {
   }
 
   handleDarkMode() {
+    let state = this.state;
     if (localStorage.theme === 'dark') {
       document.documentElement.classList.remove('dark')
       localStorage.theme = 'light'
+      state.theme = 'light';
     } else {
       document.documentElement.classList.add('dark')
       localStorage.theme = 'dark'
+      state.theme = 'dark';
     }
+    this.setState(state);
   }
 
   render() {
@@ -134,7 +138,9 @@ class App extends React.Component {
             <Route path='/info' element={<Instructions/>} />
             <Route path='/stats' element={
             <Statistics
+              key={this.state.theme}
               currState={this.state}
+              theme={this.state.theme}
             />
             } />
             <Route path='/suggestions' element={<SuggestionForm/>} />
