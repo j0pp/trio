@@ -3,6 +3,7 @@ import db from './firebase'
 import { getDocs, collection, query } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import Chart from 'react-apexcharts';
+import apexchart from 'apexcharts';
 // Utils
 import { formatTime } from './utils/utils';
 
@@ -24,6 +25,7 @@ class Statistics extends React.Component {
             worstTime: null,
             percent: 5,
             puzzleId: todaysPuzzle,
+            theme: this.props.theme,
             series: [
                 {
                   name: 'everyone else',
@@ -36,32 +38,37 @@ class Statistics extends React.Component {
                   data: []
                 }
               ],
-              options: {
-                chart: {
-                  type: 'boxPlot',
-                  height: 350
-                },
-                colors: ['#008FFB', '#FEB019'],
+            options: {
+              chart: {
+                type: 'boxPlot',
+                height: 350,
+                background: 'none',
+                id: 'chart'
+              },
+              colors: ['#008FFB', '#FEB019'],
+              title: {
+                text: 'Horizontal BoxPlot Chart',
+                align: 'left'
+              },
+              xaxis: {
+                type: 'string'
+              },
+              yaxis: {
+                type: 'numeric',
                 title: {
-                  text: 'Horizontal BoxPlot Chart',
-                  align: 'left'
+                  text: 'Solved Time'
                 },
-                xaxis: {
-                  type: 'string'
-                },
-                yaxis: {
-                  type: 'numeric',
-                  title: {
-                    text: 'Solved Time'
-                  },
-                  labels: {
-                    formatter: (value) => { return formatTime(value) }
-                  }
-                },
-                tooltip: {
-                  shared: false,
-                  intersect: true
+                labels: {
+                  formatter: (value) => { return formatTime(value) }
                 }
+              },
+              tooltip: {
+                shared: false,
+                intersect: true
+              },
+              theme: {
+                mode: 'light'
+              }
             },
         }
     }
@@ -100,12 +107,19 @@ class Statistics extends React.Component {
         }
       }
       let timesArr = Object.keys(timesJson).map((key) => timesJson[key]);
+      timesArr = timesArr.filter((player) => player['times'].length === 3);
       timesArr.sort(function(a, b){return a['times'].reduce((t1, t2) => t1 + t2, 0) - b['times'].reduce((t1, t2) => t1 + t2, 0)});
       console.log(timesArr[0]['times'].reduce((t1, t2) => t1 + t2, 0))
-      if (timesArr.length > 4) {
-        state.leaderboard = timesArr.slice(0, 5);
-      }
+      state.leaderboard = timesArr.slice(0, 5);
       state.loaded = true;
+      // Handle dark mode
+      if (document.documentElement.classList.contains('dark')) {
+        state.options.theme.mode = 'dark';
+        state.options.chart.background = 'black';
+      } else {
+        state.options.theme.mode = 'light';
+        state.options.chart.background = 'none';
+      }
       this.setState(state);
       /*
       const worstQuery = query(puzzleCollection, orderBy("solvedTime", "desc"), limit(1));
@@ -148,7 +162,7 @@ class Statistics extends React.Component {
                 <p>Leaderboard:</p>
                 <div>
                 {this.state.leaderboard.map((player, index) => (
-                  <p key={index}>{player['name'] === '' ? index : player['name']}. {formatTime(player['times'].reduce((t1, t2) => t1 + t2, 0))}</p>
+                  <p key={index}>{player['name'] === '' ? index + 1 : player['name']}. {formatTime(player['times'].reduce((t1, t2) => t1 + t2, 0))}</p>
                 ))}
                 </div>
               </div>
@@ -167,7 +181,6 @@ class Statistics extends React.Component {
                 Back to game
             </button>
             </Link>
-            
         </div>
         );
     }
