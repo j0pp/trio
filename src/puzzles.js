@@ -250,5 +250,19 @@ export const puzzles = [
       trio: ["land", "hand", "house"],
       answer: "farm"
     }  
+  ],
+  [
+    {
+      trio: ["broken", "sun", "eye"],
+      answer: "glass"
+    },
+    {
+      trio: ["brain", "plant", "horse"],
+      answer: "power"
+    },
+    {
+      trio: ["reading", "service", "stick"],
+      answer: "lip"
+    }  
   ]
 ]
