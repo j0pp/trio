@@ -176,7 +176,7 @@ class Game extends React.Component {
               </button>
               <Link to="/stats">
                 <button
-                    className='rounded-lg border-2 p-2 border-black dark:border-yellow-50 ml-3'
+                    className='rounded-lg border-2 p-2 border-black dark:border-yellow-50 ml-10'
                     hidden={!this.state.game[this.state.game.length - 1].solvedTime}
                 >
                     <ChartBarIcon

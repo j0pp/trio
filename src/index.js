@@ -1,12 +1,13 @@
 // React
 import React from 'react';
 import ReactDOM from 'react-dom';
+
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 
 // Components
@@ -14,7 +15,13 @@ import Statistics from './Statistics';
 import Game from './Game';
 import SuggestionForm from './SuggestionForm';
 import Instructions from './Instructions';
-import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon } from '@heroicons/react/solid'
+import { ChartBarIcon, QuestionMarkCircleIcon, MoonIcon, LightBulbIcon, HomeIcon } from '@heroicons/react/solid'
+// import {
+//   ChartBarIcon as ChartBarOutline,
+//   QuestionMarkCircleIcon as QMarkOutline,
+//   MoonIcon as MoonOutline,
+//   LightBulbIcon as LightBulbOutline,
+//   HomeIcon as HomeOutline } from '@heroicons/react/outline'
 //import { ShareIcon } from '@heroicons/react/outline'
 
 // Other
@@ -97,6 +104,11 @@ class App extends React.Component {
           Trio
         </div>
           <div className="flex justify-center font-mono font-bold">
+            <Link to="/game">
+              <HomeIcon
+                className="h-7 w-7 mx-3 cursor-pointer"
+              />
+            </Link>
             <Link to="/info">
               <QuestionMarkCircleIcon
                 className="h-7 w-7 mx-3 cursor-pointer"

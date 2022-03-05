@@ -33,16 +33,6 @@ class Instructions extends React.Component {
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
             <em>Contact: <a className="text-pink-300" href="mailto: beaubien.jon@gmail.com" rel="noreferrer">beaubien.jon@gmail.com</a></em>
           </p>
-          <div className='text-center'>
-            <Link to="/game">
-            <button
-              className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-            >
-              Go to game
-            </button>
-            </Link>
-          </div>
           
         </div>
     );

@@ -86,19 +86,22 @@ class Puzzle extends React.Component {
   render() {
       return (
         <div>
-          <Title cryptic={this.state.cryptic} difficulty={this.props.title} />
+          <Title cryptic={this.state.cryptic} title={this.props.title} />
           <div className="flex justify-center">
             {this.state.started
               ? <div className='mt-2'>
                   <div className="text-center white-space-nowrap">{this.props.puzzle.trio[0]} / {this.props.puzzle.trio[1]} / {this.props.puzzle.trio[2]}</div>
-                  <input
-                    disabled={this.props.solvedTime}
-                    defaultValue={this.props.solvedTime ? this.props.puzzle.answer : ''}
-                    className={this.state.animateInput ? "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black animate-wiggle border-red-700"
-                                                       : "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white"}
-                    onAnimationEnd={() => this.toggleInputAnimation()} 
-                    onKeyPress={this.attemptSolve}
-                  />
+                  <div className="flex justify-center">
+                    <input
+                      disabled={this.props.solvedTime}
+                      defaultValue={this.props.solvedTime ? this.props.puzzle.answer : ''}
+                      className={this.state.animateInput ? "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black animate-wiggle border-red-700"
+                                                        : "indent-1 outline-none border-2 bg-inherit rounded dark:bg-black border-black dark:border-white"}
+                      onAnimationEnd={() => this.toggleInputAnimation()} 
+                      onKeyPress={this.attemptSolve}
+                    />
+                  </div>
+                  
                   <div className="flex flex-row items-center justify-center">  
                     <ClockIcon className="h-7 w-7 m-1 text-center"/>
                     <div className="">{formatTime(this.state.secondsPast)}</div>
