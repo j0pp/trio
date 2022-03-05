@@ -239,16 +239,20 @@ export const puzzles = [
   ],
   [
     {
-      trio: ["cracker", "fly", "fighter"],
-      answer: "fire"
+      trio: ["asd", "fly", "fighter"],
+      answer: "fire",
+      title: "Author: Charlie",
+      link: null,
     },
     {
       trio: ["fight", "control", "machine"],
-      answer: "gun"
+      answer: "gun",
+      title: "Difficulty: Medium"
     },
     {
       trio: ["pea", "shell", "chest"],
-      answer: "nut"
+      answer: "nut",
+      title: "Difficulty: Hard"
     }  
   ],
   [

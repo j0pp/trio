@@ -79,7 +79,7 @@ class Game extends React.Component {
       this.storeState();
       await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', state.uuid), docData);
   
-      if (i === 2) {
+      if (i === this.state.game.length - 1) {
         let x = 0;
         let flash = setInterval(() => {
           this.handleDarkMode();
@@ -130,39 +130,19 @@ class Game extends React.Component {
             <div className="flex justify-center font-mono font-italic font-bold text-xs">
                 (next puzzle in {24 - (new Date().getHours())} hrs)
             </div>
-            <div className="w-screen mx-auto font-mono mt-4">
+            {this.state.game.map((game, index) => 
+              <div className="w-screen mx-auto font-mono mt-4" key={index}>
                 <Puzzle
-                title='Difficulty: Easy'
-                startTime={this.state.game[0].startTime}
-                puzzle={this.state.game[0].puzzle}
-                solvedTime={this.state.game[0].solvedTime}
-                onSolve={(time) => this.puzzleSolved(0, time)}
-                enableStart={() => this.enableStart(0)}
-                setStartedTime={(time) => this.setStartedTime(0, time)}
+                  title={game.puzzle.title}
+                  startTime={game.startTime}
+                  puzzle={game.puzzle}
+                  solvedTime={game.solvedTime}
+                  onSolve={(time) => this.puzzleSolved(index, time)}
+                  enableStart={() => this.enableStart(index)}
+                  setStartedTime={(time) => this.setStartedTime(index, time)}
                 />
-            </div>
-            <div className="w-screen mx-auto font-mono mt-6">
-                <Puzzle
-                title='Difficulty: Medium'
-                startTime={this.state.game[1].startTime}
-                puzzle={this.state.game[1].puzzle}
-                solvedTime={this.state.game[1].solvedTime}
-                onSolve={(time) => this.puzzleSolved(1, time)}
-                enableStart={() => this.enableStart(1)}
-                setStartedTime={(time) => this.setStartedTime(1, time)}
-                />
-            </div>
-            <div className="w-screen mx-auto font-mono mt-6">
-                <Puzzle
-                title='Difficulty: Hard'
-                startTime={this.state.game[2].startTime}
-                puzzle={this.state.game[2].puzzle}
-                solvedTime={this.state.game[2].solvedTime}
-                onSolve={(time) => this.puzzleSolved(2, time)}
-                enableStart={() => this.enableStart(2)}
-                setStartedTime={(time) => this.setStartedTime(2, time)}
-                />
-            </div>
+              </div>
+            )}
             <div className='flex justify-center font-mono font-italic font-bold my-3'>
               <button
                   className='rounded-lg border-2 p-2 border-black dark:border-yellow-50'
