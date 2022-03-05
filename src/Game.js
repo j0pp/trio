@@ -11,7 +11,7 @@ import { formatTime } from './utils/utils';
 
 // Firebase
 import db from './firebase';
-import { addDoc, collection } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 class Game extends React.Component {
     constructor(props) {
@@ -66,13 +66,18 @@ class Game extends React.Component {
       this.props.onSolve(i, time)
       let state = this.state;
       state.game[i].solvedTime = time;
-      this.setState(state);
-      this.storeState();
+      
       let difficulties = ['easy', 'medium', 'hard']
       const docData = {
-        solvedTime: time
+        solvedTime: time,
+        name: ''
       };
-      await addDoc(collection(db, 'puzzles/' + state.id + difficulties[i] + '/players'), docData);
+      if (!state.uuid) {
+        state.uuid = Date.now().toString(16) + Math.random().toString(16)
+      }
+      this.setState(state);
+      this.storeState();
+      await setDoc(doc(db, 'puzzles/' + state.id + difficulties[i] + '/players', state.uuid), docData);
   
       if (i === 2) {
         let x = 0;
