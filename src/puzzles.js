@@ -264,5 +264,19 @@ export const puzzles = [
       trio: ["reading", "service", "stick"],
       answer: "lip"
     }  
+  ],
+  [
+    {
+      trio: ["head", "street", "dark"],
+      answer: "light"
+    },
+    {
+      trio: ["demon", "limit", "way"],
+      answer: "speed"
+    },
+    {
+      trio: ["line", "fruit", "sucker"],
+      answer: "punch"
+    }  
   ]
 ]
