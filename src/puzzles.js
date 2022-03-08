@@ -278,5 +278,19 @@ export const puzzles = [
       trio: ["line", "fruit", "sucker"],
       answer: "punch"
     }  
+  ],
+  [
+    {
+      trio: ["worm", "shelf", "end"],
+      answer: "book"
+    },
+    {
+      trio: ["surprise", "line", "birthday"],
+      answer: "party"
+    },
+    {
+      trio: ["stick", "maker", "point"],
+      answer: "match"
+    }  
   ]
 ]
