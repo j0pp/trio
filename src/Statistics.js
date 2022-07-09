@@ -1,9 +1,9 @@
 import React from 'react';
 import db from './firebase'
 import { getDocs, collection, query } from "firebase/firestore";
-import { Link } from "react-router-dom";
-import Chart from 'react-apexcharts';
-import apexchart from 'apexcharts';
+// import { Link } from "react-router-dom";
+// import Chart from 'react-apexcharts';
+// import apexchart from 'apexcharts';
 // Utils
 import { formatTime } from './utils/utils';
 
