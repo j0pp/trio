@@ -1,4 +1,4 @@
-# Word Trio
+# Word Trio (https://wordtrio.com)
 
 This project was made for fun using React and Tailwind CSS.
 
