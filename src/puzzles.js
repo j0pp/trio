@@ -225,48 +225,72 @@ export const puzzles = [
   ],
   [
     {
-      trio: ["cracker", "fly", "fighter"],
-      answer: "fire"
+      trio: ["widow", "bite", "monkey"],
+      answer: "spider"
     },
     {
-      trio: ["fight", "control", "machine"],
-      answer: "gun"
+      trio: ["manners", "round", "tennis"],
+      answer: "table"
     },
     {
-      trio: ["pea", "shell", "chest"],
-      answer: "nut"
+      trio: ["board", "blade", "back"],
+      answer: "switch"
     }  
   ],
   [
     {
-      trio: ["asd", "fly", "fighter"],
-      answer: "fire",
-      title: "Author: Charlie",
-      link: null,
+      trio: ["playing", "credit", "report"],
+      answer: "card"
     },
     {
-      trio: ["fight", "control", "machine"],
-      answer: "gun",
-      title: "Difficulty: Medium"
+      trio: ["salt", "deep", "foam"],
+      answer: "sea"
     },
     {
-      trio: ["pea", "shell", "chest"],
-      answer: "nut",
-      title: "Difficulty: Hard"
+      trio: ["land", "hand", "house"],
+      answer: "farm"
     }  
   ],
   [
     {
-      trio: ["cracker", "fly", "fighter"],
-      answer: "fire"
+      trio: ["broken", "sun", "eye"],
+      answer: "glass"
     },
     {
-      trio: ["fight", "control", "machine"],
-      answer: "gun"
+      trio: ["brain", "plant", "horse"],
+      answer: "power"
     },
     {
-      trio: ["pea", "shell", "chest"],
-      answer: "nut"
+      trio: ["reading", "service", "stick"],
+      answer: "lip"
+    }  
+  ],
+  [
+    {
+      trio: ["head", "street", "dark"],
+      answer: "light"
+    },
+    {
+      trio: ["demon", "limit", "way"],
+      answer: "speed"
+    },
+    {
+      trio: ["line", "fruit", "sucker"],
+      answer: "punch"
+    }  
+  ],
+  [
+    {
+      trio: ["worm", "shelf", "end"],
+      answer: "book"
+    },
+    {
+      trio: ["surprise", "line", "birthday"],
+      answer: "party"
+    },
+    {
+      trio: ["stick", "maker", "point"],
+      answer: "match"
     }  
   ]
 ]
