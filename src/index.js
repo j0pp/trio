@@ -36,7 +36,8 @@ class App extends React.Component {
     const dateGameStarted = new Date('02/16/2022');
     let today = new Date();
     const puzzleNumber = Math.floor((today.getTime() - dateGameStarted.getTime()) / (1000 * 3600 * 24));
-    const puzzle = puzzles[puzzleNumber];
+    const puzzle = puzzles[puzzleNumber % puzzles.length];
+    console.log(puzzle);
 
     const seenHelp = localStorage.getItem('help');
     const storedState = JSON.parse(localStorage.getItem(puzzleNumber));

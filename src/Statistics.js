@@ -157,24 +157,32 @@ class Statistics extends React.Component {
             <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
                 Statistics:
             </p>
-            {this.state.leaderboard &&
-              <div>
-                <p>Leaderboard:</p>
-                <div>
-                {this.state.leaderboard.map((player, index) => (
-                  <p key={index}>{player['name'] === '' ? index + 1 : player['name']}. {formatTime(player['times'].reduce((t1, t2) => t1 + t2, 0))}</p>
-                ))}
-                </div>
-              </div>
-            }
-            <div hidden={this.state.playerTimes[0] == null}>
-              {this.state.enoughData ? this.state.loaded ? <Chart options={this.state.options} series={this.state.series} type="boxPlot" height={350} /> : <p>loading...</p> : <p>not enough data</p>}
-            </div>
-            <div hidden={this.state.playerTimes[0] != null}>
-                <p>Finish a puzzle to get your stats!</p>
-            </div>
+            <p>Currently undergoing maintenance, sorry :(</p>
         </div>
         );
+        // return (
+        // <div className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'>
+        //     <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
+        //         Statistics:
+        //     </p>
+        //     {this.state.leaderboard &&
+        //       <div>
+        //         <p>Leaderboard:</p>
+        //         <div>
+        //         {this.state.leaderboard.map((player, index) => (
+        //           <p key={index}>{player['name'] === '' ? index + 1 : player['name']}. {formatTime(player['times'].reduce((t1, t2) => t1 + t2, 0))}</p>
+        //         ))}
+        //         </div>
+        //       </div>
+        //     }
+        //     <div hidden={this.state.playerTimes[0] == null}>
+        //       {this.state.enoughData ? this.state.loaded ? <Chart options={this.state.options} series={this.state.series} type="boxPlot" height={350} /> : <p>loading...</p> : <p>not enough data</p>}
+        //     </div>
+        //     <div hidden={this.state.playerTimes[0] != null}>
+        //         <p>Finish a puzzle to get your stats!</p>
+        //     </div>
+        // </div>
+        // );
     }
 }
 
