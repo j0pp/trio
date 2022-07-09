@@ -31,7 +31,7 @@ class Title extends React.Component {
         <div
           className='font-mono text-center'
         >
-          Difficulty: {this.props.difficulty}
+          {this.props.title}
         </div>
       );
     }

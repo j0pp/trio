@@ -1,10 +1,11 @@
 import React from 'react';
+// import { Link } from 'react-router-dom';
 
 class SuggestionForm extends React.Component {
 
   render() {
       return (
-        <div>
+        <div className='w-screen h-28 mx-auto px-5 font-mono mt-4 md:w-1/2 text-center'>
           <p className="my-4 text-blueGray-500 text-lg leading-relaxed">
             Have a good idea for a potential Trio? Submit it here!
           </p>
